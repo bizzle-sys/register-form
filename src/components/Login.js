@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const Login = () => {
+export const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleOnSubmit = (e) => {
@@ -26,8 +26,10 @@ export const Login = () => {
           placeholder="enter your password"
         />
         <button type="submit">Login</button>
-        <button>New Member? Register Here</button>
       </form>
+      <button onClick={() => props.onFormSwitch("register")}>
+        New Member? Register Here
+      </button>
     </div>
   );
 };
