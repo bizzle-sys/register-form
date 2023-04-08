@@ -1,4 +1,6 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
+import { auth } from "../firebase/firebase-config";
 
 export const Register = (props) => {
   const [email, setEmail] = useState("");
@@ -6,14 +8,25 @@ export const Register = (props) => {
   const [name, setName] = useState("");
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(email);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
     <div>
       <form onSubmit={handleOnSubmit} action="">
         <label htmlFor="full name">Full Name:</label>
-        <input value={name} type="text" placeholder="enter your name" />
+        <input
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          type="text"
+          placeholder="enter your name"
+        />
         <label htmlFor="email"> Email: </label>
         <input
           value={email}
